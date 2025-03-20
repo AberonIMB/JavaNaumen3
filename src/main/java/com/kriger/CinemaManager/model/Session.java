@@ -7,7 +7,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Класс сеанса
+ */
 public class Session {
+
     private Long id;
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
@@ -25,30 +29,51 @@ public class Session {
         this.booking = new HashSet<>();
     }
 
+    /**
+     * Возвращает время начала сеанса
+     */
     public LocalDateTime getStartTime() {
         return startTime;
     }
 
+    /**
+     * Возвращает время конца сеанса
+     */
     public LocalDateTime getEndTime() {
         return endTime;
     }
 
+    /**
+     * Возвращает список броней сеанса
+     */
     public Set<Booking> getBooking() {
         return booking;
     }
 
+    /**
+     * Возвращает зал сеанса
+     */
     public Hall getHall() {
         return hall;
     }
 
+    /**
+     * Возвращает название фильма
+     */
     public String getMovie() {
         return movie;
     }
 
+    /**
+     * Возвращает ID сеанса
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Устанавливает ID сеанса
+     */
     public void setId(Long id) {
         this.id = id;
     }

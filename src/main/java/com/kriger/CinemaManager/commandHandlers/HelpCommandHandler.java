@@ -3,6 +3,9 @@ package com.kriger.CinemaManager.commandHandlers;
 import com.kriger.CinemaManager.command.Command;
 import org.springframework.stereotype.Component;
 
+/**
+ * Обработчик команды для получения справки
+ */
 @Component
 public class HelpCommandHandler implements CommandHandler {
 

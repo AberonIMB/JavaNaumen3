@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Обработчик команды для получения списка сеансов
+ */
 @Component
 public class GetAllSessionsCommandHandler implements CommandHandler {
 
@@ -36,10 +39,16 @@ public class GetAllSessionsCommandHandler implements CommandHandler {
         return "list-sessions";
     }
 
+    /**
+     * Валидирует команду
+     */
     private void validateCommand(Command command) {
         validateParamsCount(command, 0);
     }
 
+    /**
+     * Выводит список сеансов
+     */
     private void printSessions(List<Session> sessions) {
         System.out.println("Список сеансов: ");
 

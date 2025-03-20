@@ -6,6 +6,9 @@ import com.kriger.CinemaManager.service.interfaces.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Обработчик команды для удаления сеанса
+ */
 @Component
 public class DeleteSessionCommandHandler implements CommandHandler {
 
@@ -35,6 +38,9 @@ public class DeleteSessionCommandHandler implements CommandHandler {
         return "delete-session";
     }
 
+    /**
+     * Валидирует команду
+     */
     private void validateCommand(Command command) {
         validateParamsCount(command, 1);
         validateParamIsNumber(command, 0, "ID сеанса должен быть числом");

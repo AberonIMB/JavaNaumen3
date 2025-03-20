@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Класс для работы с сеансами
+ */
 @Service
 public class SessionServiceImpl implements SessionService {
 
@@ -27,6 +30,9 @@ public class SessionServiceImpl implements SessionService {
 //        this.hallService = hallService;
     }
 
+    /**
+     * Выводит название и версию приложения при запуске
+     */
     @PostConstruct
     public void init() {
         System.out.println("Приложение: " + appConfig.getAppName());

@@ -1,5 +1,8 @@
 package com.kriger.CinemaManager.model;
 
-public class Booking {
+/**
+ * Класс брони
+ */
+public class Booking { // затычка
     //TODO
 }

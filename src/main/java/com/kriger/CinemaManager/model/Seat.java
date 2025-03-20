@@ -1,5 +1,8 @@
 package com.kriger.CinemaManager.model;
 
-public class Seat {
+/**
+ * Класс места
+ */
+public class Seat { //затычка
     //TODO
 }

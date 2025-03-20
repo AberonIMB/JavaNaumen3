@@ -6,6 +6,9 @@ import com.kriger.CinemaManager.service.interfaces.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Обработчик команды для получения сеанса
+ */
 @Component
 public class GetSessionCommandHandler implements CommandHandler {
 
@@ -35,6 +38,9 @@ public class GetSessionCommandHandler implements CommandHandler {
         return "show-session";
     }
 
+    /**
+     * Валидирует команду
+     */
     private void validateCommand(Command command) {
         validateParamsCount(command, 1);
         validateParamIsNumber(command, 0, "ID сеанса должен быть числом");

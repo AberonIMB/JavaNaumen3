@@ -10,16 +10,17 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Обработчик команды для создания сеанса
+ */
 @Component
 public class CreateSessionCommandHandleer implements CommandHandler {
 
     private final SessionService sessionService;
-//    private final HallService hallService;
 
     @Autowired
     public CreateSessionCommandHandleer(SessionService sessionService) {
         this.sessionService = sessionService;
-//        this.hallService = hallService;
     }
 
     @Override
@@ -52,8 +53,10 @@ public class CreateSessionCommandHandleer implements CommandHandler {
         return "create-session";
     }
 
-    //возможно объединить парсинг и валидацию, но Long и int
-    private void validateCommand(Command command) {
+    /**
+     * Валидирует команду
+     */
+    private void validateCommand(Command command) { //возможно объединить парсинг и валидацию, но Long и int
         validateParamsCount(command, 5);
 
         validateParamIsNumber(command, 0, "ID сеанса должен быть числом");
