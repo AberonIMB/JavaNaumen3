@@ -1,9 +1,11 @@
 package com.kriger.CinemaManager.commandHandlers;
 
 import com.kriger.CinemaManager.command.Command;
+import com.kriger.CinemaManager.commandValidators.CommandValidator;
 import com.kriger.CinemaManager.model.Session;
 import com.kriger.CinemaManager.service.interfaces.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.DateTimeException;
@@ -17,16 +19,19 @@ import java.time.format.DateTimeFormatter;
 public class CreateSessionCommandHandleer implements CommandHandler {
 
     private final SessionService sessionService;
+    private final CommandValidator commandValidator;
 
     @Autowired
-    public CreateSessionCommandHandleer(SessionService sessionService) {
+    public CreateSessionCommandHandleer(SessionService sessionService,
+                                        @Qualifier("createSessionCommandValidator") CommandValidator commandValidator) {
         this.sessionService = sessionService;
+        this.commandValidator = commandValidator;
     }
 
     @Override
     public void process(Command command) {
         try {
-            validateCommand(command);
+            commandValidator.validateCommand(command);
 
             Long id = Long.parseLong(command.getCommandParams().getFirst());
             LocalDateTime startTime = LocalDateTime.parse(
@@ -51,24 +56,5 @@ public class CreateSessionCommandHandleer implements CommandHandler {
     @Override
     public String getCommandName() {
         return "create-session";
-    }
-
-    /**
-     * Валидирует команду
-     */
-    private void validateCommand(Command command) { //возможно объединить парсинг и валидацию, но Long и int
-        validateParamsCount(command, 5);
-
-        validateParamIsNumber(command, 0, "ID сеанса должен быть числом");
-        validateParamIsNumber(command, 2, "Номер зала должен быть числом");
-        validateParamIsNumber(command, 3, "Продолжительность сеанса должна быть целым числом");
-
-        LocalDateTime startTime = LocalDateTime.parse(
-                command.getCommandParams().get(1),
-                DateTimeFormatter.ofPattern("dd-MM-yyyy-HH:mm"));
-
-        if (startTime.isBefore(LocalDateTime.now())) {
-            throw new IllegalArgumentException("Нельзя создать сеанс в прошлом");
-        }
     }
 }

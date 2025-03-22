@@ -54,12 +54,13 @@ public class SessionServiceImpl implements SessionService {
                 throw new RuntimeException("Сеанс с таким ID уже существует");
             }
 
-            if (session.getHall().equals(hall)
-                    && (session.getStartTime().isBefore(startTime) && session.getEndTime().isAfter(startTime)
-                        || session.getStartTime().isBefore(endTime) && session.getEndTime().isAfter(endTime))
-                        || session.getStartTime().isBefore(startTime) && session.getEndTime().isAfter(endTime)
-                        || session.getStartTime().isAfter(startTime) && session.getEndTime().isBefore(endTime)
-                        || session.getStartTime().equals(startTime) && session.getEndTime().equals(endTime)) {
+            //проверка зала еще
+
+            if ((session.getStartTime().isBefore(startTime) && session.getEndTime().isAfter(startTime))
+                        || (session.getStartTime().isBefore(endTime) && session.getEndTime().isAfter(endTime))
+                        || (session.getStartTime().isBefore(startTime) && session.getEndTime().isAfter(endTime))
+                        || (session.getStartTime().isAfter(startTime) && session.getEndTime().isBefore(endTime))
+                        || (session.getStartTime().equals(startTime) && session.getEndTime().equals(endTime))) {
                 throw new RuntimeException("Ваш сеанс пересекается с другим сеансом: " + session);
             }
         }

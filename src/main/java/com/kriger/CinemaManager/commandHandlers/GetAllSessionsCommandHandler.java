@@ -1,9 +1,11 @@
 package com.kriger.CinemaManager.commandHandlers;
 
 import com.kriger.CinemaManager.command.Command;
+import com.kriger.CinemaManager.commandValidators.CommandValidator;
 import com.kriger.CinemaManager.model.Session;
 import com.kriger.CinemaManager.service.interfaces.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,16 +17,19 @@ import java.util.List;
 public class GetAllSessionsCommandHandler implements CommandHandler {
 
     private final SessionService sessionService;
+    private final CommandValidator commandValidator;
 
     @Autowired
-    public GetAllSessionsCommandHandler(SessionService sessionService) {
+    public GetAllSessionsCommandHandler(SessionService sessionService,
+                                        @Qualifier("zeroParamsCountCommandValidator") CommandValidator commandValidator) {
         this.sessionService = sessionService;
+        this.commandValidator = commandValidator;
     }
 
     @Override
     public void process(Command command) {
         try {
-            validateCommand(command);
+            commandValidator.validateCommand(command);
 
             List<Session> sessions = sessionService.getAllSessions();
 
@@ -37,13 +42,6 @@ public class GetAllSessionsCommandHandler implements CommandHandler {
     @Override
     public String getCommandName() {
         return "list-sessions";
-    }
-
-    /**
-     * Валидирует команду
-     */
-    private void validateCommand(Command command) {
-        validateParamsCount(command, 0);
     }
 
     /**

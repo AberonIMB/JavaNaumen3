@@ -1,6 +1,9 @@
 package com.kriger.CinemaManager.commandHandlers;
 
 import com.kriger.CinemaManager.command.Command;
+import com.kriger.CinemaManager.commandValidators.CommandValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,8 +12,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelpCommandHandler implements CommandHandler {
 
+    private final CommandValidator commandValidator;
+
+    @Autowired
+    public HelpCommandHandler(@Qualifier("zeroParamsCountCommandValidator") CommandValidator commandValidator) {
+        this.commandValidator = commandValidator;
+    }
+
     @Override
     public void process(Command command) {
+        try {
+            commandValidator.validateCommand(command);
+            printHelp();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public String getCommandName() {
+        return "help";
+    }
+
+    private void printHelp() {
         System.out.println(
                 """
                         Список команд:
@@ -22,10 +46,5 @@ public class HelpCommandHandler implements CommandHandler {
                         - exit - выход
                         """
         );
-    }
-
-    @Override
-    public String getCommandName() {
-        return "help";
     }
 }

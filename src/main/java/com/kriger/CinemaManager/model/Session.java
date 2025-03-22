@@ -96,7 +96,7 @@ public class Session {
         return "Сеанс {" +
                 "ID = " + id +
                 ",\n Время начала = " + DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").format(startTime) +
-                ",\n Время конца = " + DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").format(startTime) +
+                ",\n Время конца = " + DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").format(endTime) +
                 ",\n Зал = " + hall +
                 ",\n Фильм = " + movie +
                 "}\n";

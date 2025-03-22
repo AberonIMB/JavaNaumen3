@@ -22,11 +22,13 @@ public class CommandScannerConfig {
                 System.out.println("Введите команду. 'exit' для выхода. 'help' для справки.");
                 while (true) {
                     String input = scanner.nextLine();
-                    if (input.isEmpty()) {
+                    if (input.isBlank()) {
                         continue;
                     } if (input.equals("exit")) {
                         System.out.println("Завершение работы");
-                        break;
+
+                        System.exit(0);
+//                        break;
                     }
 
                     Command command = new Command(input);

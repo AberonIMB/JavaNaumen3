@@ -1,9 +1,11 @@
 package com.kriger.CinemaManager.commandHandlers;
 
 import com.kriger.CinemaManager.command.Command;
+import com.kriger.CinemaManager.commandValidators.CommandValidator;
 import com.kriger.CinemaManager.model.Session;
 import com.kriger.CinemaManager.service.interfaces.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,16 +15,19 @@ import org.springframework.stereotype.Component;
 public class GetSessionCommandHandler implements CommandHandler {
 
     private final SessionService sessionService;
+    private final CommandValidator commandValidator;
 
     @Autowired
-    public GetSessionCommandHandler(SessionService sessionService) {
+    public GetSessionCommandHandler(SessionService sessionService,
+                                    @Qualifier("paramOnlyIdCommandValidator") CommandValidator commandValidator) {
         this.sessionService = sessionService;
+        this.commandValidator = commandValidator;
     }
 
     @Override
     public void process(Command command) {
         try {
-            validateCommand(command);
+            commandValidator.validateCommand(command);
 
             Long id = Long.parseLong(command.getCommandParams().getFirst());
             Session session = sessionService.getSession(id);
@@ -36,13 +41,5 @@ public class GetSessionCommandHandler implements CommandHandler {
     @Override
     public String getCommandName() {
         return "show-session";
-    }
-
-    /**
-     * Валидирует команду
-     */
-    private void validateCommand(Command command) {
-        validateParamsCount(command, 1);
-        validateParamIsNumber(command, 0, "ID сеанса должен быть числом");
     }
 }
