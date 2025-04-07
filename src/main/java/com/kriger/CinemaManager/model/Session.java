@@ -1,33 +1,47 @@
 package com.kriger.CinemaManager.model;
 
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Класс сеанса
  */
+@Entity
 public class Session {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
 
-    private final Set<Booking> booking;
-    private final Hall hall;
-    private final String movie;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
-    public Session(Long id, LocalDateTime startTime, LocalDateTime endTime, Hall hall, String movie) {
-        this.id = id;
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Booking> bookings = new ArrayList<>();
+
+    @ManyToOne
+    private Hall hall;
+
+    @ManyToOne
+    private Movie movie;
+
+    private boolean isActive;
+
+    public Session(LocalDateTime startTime, Hall hall, Movie movie) {
         this.startTime = startTime;
         this.hall = hall;
         this.movie = movie;
-        this.endTime = endTime;
-        this.booking = new HashSet<>();
+        this.endTime = startTime.plusMinutes(movie.getDuration());
+        isActive = true;
     }
+
+    public Session() {}
 
     /**
      * Возвращает время начала сеанса
@@ -46,8 +60,8 @@ public class Session {
     /**
      * Возвращает список броней сеанса
      */
-    public Set<Booking> getBooking() {
-        return booking;
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
     /**
@@ -60,7 +74,7 @@ public class Session {
     /**
      * Возвращает название фильма
      */
-    public String getMovie() {
+    public Movie getMovie() {
         return movie;
     }
 
@@ -76,6 +90,14 @@ public class Session {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean getIsActive() {
+    	return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+    	this.isActive = isActive;
     }
 
     @Override
