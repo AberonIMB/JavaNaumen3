@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//@RepositoryRestResource
+@RepositoryRestResource
 @Repository
 public class CustomSessionRepositoryImpl implements CustomSessionRepository {
 

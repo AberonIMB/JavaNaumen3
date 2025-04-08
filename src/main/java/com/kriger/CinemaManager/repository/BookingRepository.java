@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-//@RepositoryRestResource
+@RepositoryRestResource
 public interface BookingRepository extends CrudRepository<Booking, Long> {
 
     List<Booking> findBySeat(Seat seat);
