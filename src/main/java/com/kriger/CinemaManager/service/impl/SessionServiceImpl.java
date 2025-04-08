@@ -49,7 +49,7 @@ public class SessionServiceImpl implements SessionService {
                         || (session.getStartTime().isAfter(startTime) && session.getEndTime().isBefore(endTime))
                     //начало и конец совпадают
                         || (session.getStartTime().equals(startTime) && session.getEndTime().equals(endTime)))) {
-                throw new RuntimeException("Ваш сеанс пересекается с другим сеансом: " + session);
+                throw new IllegalStateException("Ваш сеанс пересекается с другим сеансом: " + session);
             }
         }
 
@@ -81,5 +81,16 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public Session getSession(Long id) {
         return sessionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Session not found"));
+    }
+
+    @Override
+    public List<Session> getActiveSessionsByTimeAndHall(Long hallId, LocalDateTime start, LocalDateTime end) {
+        Hall hall = hallService.getHallById(hallId);
+        return sessionRepository.findByIsActiveTrueAndStartTimeBetweenAndHall(start, end, hall);
+    }
+
+    @Override
+    public List<Session> getSessionsByMovieTitle(String title) {
+        return sessionRepository.findByMovieTitle(title);
     }
 }

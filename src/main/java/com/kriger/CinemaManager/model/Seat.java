@@ -1,5 +1,6 @@
 package com.kriger.CinemaManager.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -18,6 +19,7 @@ public class Seat { //затычка
     private Integer number;
 
     @ManyToOne
+    @JsonBackReference
     private Hall hall;
 
     public Seat(Integer seatRow, Integer number, Hall hall) {
