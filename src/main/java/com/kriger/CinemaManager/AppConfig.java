@@ -11,12 +11,11 @@ public class AppConfig {
     @Value("${app.version}")
     private String appVersion;
 
-//    @PostConstruct
-//    public void init() {
-//        System.out.println("Приложения: " + appName);
-//        System.out.println("Версия: " + appVersion);
-//    }
-
+    @PostConstruct
+    public void init() {
+        System.out.println("Приложения: " + appName);
+        System.out.println("Версия: " + appVersion);
+    }
 
     public String getAppName() {
         return appName;

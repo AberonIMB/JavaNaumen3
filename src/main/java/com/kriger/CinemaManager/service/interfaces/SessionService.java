@@ -4,7 +4,6 @@ import com.kriger.CinemaManager.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Интерфейс сервиса сеансов
@@ -14,7 +13,7 @@ public interface SessionService {
     /**
      * Создает сеанс
      */
-    Session createSession(Long id, LocalDateTime startTime, Long hallId, String movie, int duration);
+    Session createSession(LocalDateTime startTime, Long hallId, Long movieId);
 
     /**
      * Удаляет сеанс по id
@@ -30,24 +29,4 @@ public interface SessionService {
      * Возвращает сеанс по id
      */
     Session getSession(Long id);
-
-    /**
-     * Добавляет бронь
-     */
-    void addBooking(Session session, Booking booking);
-
-    /**
-     * Удаляет бронь
-     */
-    void removeBooking(Session session, Booking booking);
-
-    /**
-     * Возвращает список броней сеанса
-     */
-    Set<Booking> getBookings(Session session);
-
-    /**
-     * Возвращает список свободных мест сеанса
-     */
-    List<Seat> getAllFreeSeats(Session session);
 }
