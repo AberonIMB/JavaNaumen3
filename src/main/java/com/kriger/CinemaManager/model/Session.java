@@ -1,6 +1,7 @@
 package com.kriger.CinemaManager.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ public class Session {
     private LocalDateTime endTime;
 
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private final List<Booking> bookings = new ArrayList<>();
 
     @ManyToOne
@@ -59,10 +61,10 @@ public class Session {
 
     /**
      * Возвращает список броней сеанса
-     */
-    public List<Booking> getBookings() {
-        return bookings;
-    }
+//     */
+//    public List<Booking> getBookings() {
+//        return bookings;
+//    }
 
     /**
      * Возвращает зал сеанса

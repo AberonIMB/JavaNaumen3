@@ -1,5 +1,6 @@
 package com.kriger.CinemaManager.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kriger.CinemaManager.model.enums.BookingStatus;
 import jakarta.persistence.*;
 
@@ -20,6 +21,7 @@ public class Booking {
     private User user;
 
     @ManyToOne
+    @JsonBackReference
     private Session session;
 
     @ManyToOne

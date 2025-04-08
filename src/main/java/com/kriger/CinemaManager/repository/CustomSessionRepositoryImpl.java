@@ -6,11 +6,13 @@ import com.kriger.CinemaManager.model.Session;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+//@RepositoryRestResource
 @Repository
 public class CustomSessionRepositoryImpl implements CustomSessionRepository {
 

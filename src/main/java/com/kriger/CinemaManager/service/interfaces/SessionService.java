@@ -29,4 +29,15 @@ public interface SessionService {
      * Возвращает сеанс по id
      */
     Session getSession(Long id);
+
+    /**
+     * Возвращает список активных сеансов в определенном промежутке времени в определенном зале
+     */
+    List<Session> getActiveSessionsByTimeAndHall(Long hallId, LocalDateTime start, LocalDateTime end);
+
+    /**
+     * Возвращает список сеансов по названию фильма
+     */
+    List<Session> getSessionsByMovieTitle(String title);
+
 }
