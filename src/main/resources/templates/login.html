@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в систему</title>
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background: #4a6bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .alert {
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/auth/login}" method="post">
+    <div class="form-container">
+        <h2 style="margin-bottom: 1rem;">Войти</h2>
+
+        <div>
+            <label for="username">Логин:</label>
+            <input type="text" name="username" id="username" required />
+        </div>
+        <div>
+            <label for="password">Пароль:</label>
+            <input type="password" name="password" id="password" required />
+        </div>
+        <div>
+            <button type="submit">Войти</button>
+            <button type="button" onclick="location.href='/auth/registration'">Регистрация</button>
+        </div>
+
+        <div th:if="${param.error}" style="color: red; margin-top: 1rem;">
+            Неверный логин или пароль
+        </div>
+        <div th:if="${param.logout}" style="color: green; margin-top: 1rem;">
+            Вы вышли из системы
+        </div>
+    </div>
+</form>
+</body>
+</html>

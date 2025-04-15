@@ -1,4 +1,4 @@
-package com.kriger.CinemaManager.controller;
+package com.kriger.CinemaManager.controller.view;
 
 import com.kriger.CinemaManager.model.Session;
 import com.kriger.CinemaManager.service.interfaces.SessionService;
