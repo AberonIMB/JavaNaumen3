@@ -22,21 +22,8 @@ public class Hall {
     @JsonManagedReference
     private List<Seat> seats;
 
-    public Hall(String name, int rows, int seatsInRow) {
+    public Hall(String name) {
         this.name = name;
-        int capacity = rows * seatsInRow;
-
-        seats = new ArrayList<>(capacity);
-
-        generateSeats(rows, seatsInRow);
-    }
-
-    private void generateSeats(int rows, int seatsInRow) {
-        for (int i = 1; i <= rows; i++) {
-            for (int j = 1; j <= seatsInRow; j++) {
-                seats.add(new Seat(i, j, this));
-            }
-        }
     }
 
     public Hall() {}
@@ -51,6 +38,10 @@ public class Hall {
 
     public List<Seat> getSeats() {
         return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 
     public void setName(String name) {
