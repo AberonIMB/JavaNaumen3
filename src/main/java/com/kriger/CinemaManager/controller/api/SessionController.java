@@ -1,4 +1,4 @@
-package com.kriger.CinemaManager.controller;
+package com.kriger.CinemaManager.controller.api;
 
 import com.kriger.CinemaManager.dto.SessionRequest;
 import com.kriger.CinemaManager.dto.SessionResponse;
