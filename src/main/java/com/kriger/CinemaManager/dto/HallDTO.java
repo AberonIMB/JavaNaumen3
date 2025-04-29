@@ -1,12 +1,12 @@
 package com.kriger.CinemaManager.dto;
 
-public class HallRequest {
+public class HallDTO {
 
     private String name;
     private int rows;
     private int seatsInRow;
 
-    public HallRequest(String name, int rows, int seatsInRow) {
+    public HallDTO(String name, int rows, int seatsInRow) {
         this.name = name;
         this.rows = rows;
         this.seatsInRow = seatsInRow;

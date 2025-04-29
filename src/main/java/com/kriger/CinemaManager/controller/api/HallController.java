@@ -1,6 +1,6 @@
 package com.kriger.CinemaManager.controller.api;
 
-import com.kriger.CinemaManager.dto.HallRequest;
+import com.kriger.CinemaManager.dto.HallDTO;
 import com.kriger.CinemaManager.model.Hall;
 import com.kriger.CinemaManager.service.interfaces.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class HallController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<Hall> createHall(@RequestBody HallRequest hallRequest) {
+    public ResponseEntity<Hall> createHall(@RequestBody HallDTO hallRequest) {
         Hall hall = hallService.createHall(hallRequest.getName(), hallRequest.getRows(), hallRequest.getSeatsInRow());
         return ResponseEntity.ok(hall);
     }
