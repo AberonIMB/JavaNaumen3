@@ -9,5 +9,4 @@ public interface ReportService {
     Long createReport();
     void generateReport(Long id);
     Report getReport(Long id);
-    List<Report> getAllReports();
 }

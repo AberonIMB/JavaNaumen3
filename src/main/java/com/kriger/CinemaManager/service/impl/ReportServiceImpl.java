@@ -41,10 +41,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void generateReport(Long id) {
-        Report report = reportRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Report not found"));
-
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            Report report = reportRepository.findById(id).orElseThrow(
+                    () -> new IllegalArgumentException("Report not found"));
+
             long startMethodTime = System.currentTimeMillis();
             AtomicLong elapsedUsersCountTime = new AtomicLong();
             AtomicLong elapsedFindAllHallsTime = new AtomicLong();
@@ -156,15 +156,6 @@ public class ReportServiceImpl implements ReportService {
         return reportRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Report not found")
         );
-    }
-
-    @Override
-    public List<Report> getAllReports() {
-        List<Report> reports = new ArrayList<>();
-
-        reportRepository.findAll().forEach(reports::add);
-
-        return reports;
     }
 
     private String generateReportContent(long usersCount,
