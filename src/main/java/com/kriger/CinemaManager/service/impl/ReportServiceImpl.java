@@ -42,6 +42,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void generateReport(Long id) {
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+
             Report report = reportRepository.findById(id).orElseThrow(
                     () -> new IllegalArgumentException("Report not found"));
 
@@ -85,70 +86,6 @@ public class ReportServiceImpl implements ReportService {
             }
         });
     }
-
-//    @Override
-//    public void generateReport(Long id) {
-//        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-//            Report report = reportRepository.findById(id).orElseThrow(
-//                    () -> new IllegalArgumentException("Report not found"));
-//
-//            long startMethodTime = System.currentTimeMillis();
-//            AtomicLong elapsedUsersCountTime = new AtomicLong();
-//            AtomicLong elapsedFindAllHallsTime = new AtomicLong();
-//
-//            AtomicLong usersCount = new AtomicLong();
-//            List<Hall> halls = new ArrayList<>();
-//
-//            AtomicReference<Exception> exception = new AtomicReference<>();
-//
-//            Thread getUsersCount = new Thread(() -> {
-//                try {
-//                    long startUsersCountTime = System.currentTimeMillis();
-//                    usersCount.set(userRepository.count());
-//                    elapsedUsersCountTime.set(System.currentTimeMillis() - startUsersCountTime);
-//                } catch (Exception e) {
-//                    exception.set(e);
-//                }
-//            });
-//
-//            Thread getHalls = new Thread(() -> {
-//                try {
-//                    long startHallsCountTime = System.currentTimeMillis();
-//                    int s = 2 / 0;
-//                    hallRepository.findAll().forEach(halls::add);
-//                    elapsedFindAllHallsTime.set(System.currentTimeMillis() - startHallsCountTime);
-//                } catch (Exception e) {
-//                    exception.set(e);
-//                }
-//            });
-//
-//            getUsersCount.start();
-//            getHalls.start();
-//
-//            try {
-//                getUsersCount.join();
-//                getHalls.join();
-//
-//                if (exception.get() != null) {
-//                    throw exception.get();
-//                }
-//
-//                long elapsedMethodTime = System.currentTimeMillis() - startMethodTime;
-//
-//                String content = generateReportContent(usersCount.get(),
-//                        halls, elapsedUsersCountTime.get(), elapsedFindAllHallsTime.get(), elapsedMethodTime, id);
-//
-//                report.setContent(content);
-//                report.setStatus(ReportStatus.COMPLETED);
-//                reportRepository.save(report);
-//
-//            } catch (Exception e) {
-//                report.setStatus(ReportStatus.FAILED);
-//                report.setContent("Произошла ошибка во время формирования отчета: " + e.getMessage());
-//                reportRepository.save(report);
-//            }
-//        });
-//    }
 
     @Override
     public Report getReport(Long id) {
