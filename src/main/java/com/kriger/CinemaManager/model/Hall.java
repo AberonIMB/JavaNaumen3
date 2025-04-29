@@ -47,4 +47,12 @@ public class Hall {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Hall{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

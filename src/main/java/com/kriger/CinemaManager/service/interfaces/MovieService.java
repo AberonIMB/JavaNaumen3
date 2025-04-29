@@ -8,4 +8,8 @@ public interface MovieService {
      * Возвращает фильм по id
      */
     Movie getMovieById(Long id);
+
+    void deleteAll();
+
+    Movie createMovie(String title, String genre, String description, int duration);
 }

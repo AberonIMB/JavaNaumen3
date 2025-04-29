@@ -40,4 +40,5 @@ public interface SessionService {
      */
     List<Session> getSessionsByMovieTitle(String title);
 
+    void deleteAll();
 }

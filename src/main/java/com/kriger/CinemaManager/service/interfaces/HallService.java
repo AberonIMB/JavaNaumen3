@@ -16,4 +16,6 @@ public interface HallService {
      * Возвращает зал по id
      */
     Hall getHallById(Long id);
+
+    void deleteAll();
 }

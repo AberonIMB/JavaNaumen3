@@ -62,4 +62,15 @@ public class Movie {
     public void setDuration(Integer duration) {
         this.duration = duration;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", description='" + description + '\'' +
+                ", duration=" + duration +
+                '}';
+    }
 }

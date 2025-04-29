@@ -20,6 +20,9 @@ public class SessionResponse {
         this.movieTitle = session.getMovie().getTitle();
     }
 
+
+    public SessionResponse() {}
+
     public Long getId() {
         return id;
     }
