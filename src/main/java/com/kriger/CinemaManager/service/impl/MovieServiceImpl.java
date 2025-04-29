@@ -20,4 +20,19 @@ public class MovieServiceImpl implements MovieService {
     public Movie getMovieById(Long id) {
         return movieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Movie not found"));
     }
+
+    @Override
+    public void deleteAll() {
+        movieRepository.deleteAll();
+    }
+
+    @Override
+    public Movie createMovie(String title, String genre, String description, int duration) {
+        if (movieRepository.findByTitle(title) != null) {
+            throw new IllegalArgumentException("Movie with title " + title + " already exists");
+        }
+
+        Movie movie = new Movie(title, genre, description, duration);
+        return movieRepository.save(movie);
+    }
 }

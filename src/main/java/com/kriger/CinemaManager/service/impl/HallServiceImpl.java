@@ -34,6 +34,11 @@ public class HallServiceImpl implements HallService {
         return hallRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Hall not found"));
     }
 
+    @Override
+    public void deleteAll() {
+        hallRepository.deleteAll();
+    }
+
     private List<Seat> generateSeats(Hall hall, int rows, int seatsInRow) {
         List<Seat> seats = new ArrayList<>(rows * seatsInRow);
         for (int i = 1; i <= rows; i++) {

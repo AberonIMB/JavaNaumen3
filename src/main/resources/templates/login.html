@@ -90,14 +90,14 @@
             <input type="password" name="password" id="password" required />
         </div>
         <div>
-            <button type="submit">Войти</button>
+            <button type="submit" id="login-button">Войти</button>
             <button type="button" onclick="location.href='/auth/registration'">Регистрация</button>
         </div>
 
-        <div th:if="${param.error}" style="color: red; margin-top: 1rem;">
+        <div th:if="${param.error}" id="failed-login" style="color: red; margin-top: 1rem;">
             Неверный логин или пароль
         </div>
-        <div th:if="${param.logout}" style="color: green; margin-top: 1rem;">
+        <div th:if="${param.logout}" id="logout-success" style="color: green; margin-top: 1rem;">
             Вы вышли из системы
         </div>
     </div>

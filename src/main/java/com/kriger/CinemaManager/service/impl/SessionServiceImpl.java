@@ -93,4 +93,9 @@ public class SessionServiceImpl implements SessionService {
     public List<Session> getSessionsByMovieTitle(String title) {
         return sessionRepository.findByMovieTitle(title);
     }
+
+    @Override
+    public void deleteAll() {
+        sessionRepository.deleteAll();
+    }
 }
